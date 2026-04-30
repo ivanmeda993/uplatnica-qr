@@ -1,0 +1,15 @@
+/* TEAM */
+
+  Developer: Ivan Milićević
+  Site: https://ivanmilicevic.dev/
+  GitHub: @ivanmilicevic
+
+/* SITE */
+
+  Built with: Next.js 16, React 19, TypeScript, Tailwind CSS v4, shadcn/ui
+  Backend: Elysia + Better Auth + Prisma 7 + PostgreSQL
+  QR: NBS IPS specification (printed bills, ECC level M)
+  Hosting: Render
+  Standards: PWA, semantic HTML, sr-Latn-RS
+
+  Last update: 2026

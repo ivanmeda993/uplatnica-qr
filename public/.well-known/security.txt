@@ -1,0 +1,4 @@
+Contact: https://ivanmilicevic.dev/
+Expires: 2027-04-30T23:59:59.000Z
+Preferred-Languages: sr, en
+Canonical: https://uplatnica-qr.com/.well-known/security.txt
