@@ -47,9 +47,10 @@ test-results/
 !.vscode/settings.json
 .idea
 
-# claude (private plans / local skills)
+# claude (private plans / local skills / runtime state)
 .claude/plans/
 .claude/.cache/
+.claude/scheduled_tasks.lock
 
 # prisma
 prisma/dev.db
