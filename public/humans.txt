@@ -6,6 +6,7 @@
 
 /* SITE */
 
+  Site: https://ipsuplatnica.com
   Built with: Next.js 16, React 19, TypeScript, Tailwind CSS v4, shadcn/ui
   Backend: Elysia + Better Auth + Prisma 7 + PostgreSQL
   QR: NBS IPS specification (printed bills, ECC level M)
