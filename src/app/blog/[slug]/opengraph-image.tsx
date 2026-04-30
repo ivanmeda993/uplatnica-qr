@@ -103,7 +103,7 @@ export default async function BlogOgImage({ params }: PageProps) {
           alignSelf: 'flex-start',
         }}
       >
-        uplatnica-qr · blog
+        ipsuplatnica.com · blog
       </div>
     </div>,
     { ...size }
