@@ -19,6 +19,7 @@ import { EmptyState } from '@/components/ui/empty-state';
 import { Skeleton } from '@/components/ui/skeleton';
 import { api } from '@/lib/api-client';
 import { qk } from '@/lib/query-keys';
+import { cn } from '@/lib/utils';
 import { formatAccountDisplay, formatAmountDisplay } from '@/modules/recipient/lib/format';
 import {
   UplatnicaList,
@@ -73,7 +74,7 @@ export function DashboardContent({ greetingName }: DashboardContentProps) {
         <p className="text-muted-foreground mt-2 max-w-md text-sm">
           {recipients.length > 0
             ? `Imaš ${recipients.length} ${pluralRecipients(recipients.length)} i ${uplatnice.length} ${pluralUplatnica(uplatnice.length)} u istoriji.`
-            : 'Dodaj prvog primaoca da bi mogao da generišeš QR za sekundu.'}
+            : 'Dodaj prvog primaoca pa ti je sledeći QR samo klik dalje.'}
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Button asChild variant="brand">
@@ -134,7 +135,7 @@ export function DashboardContent({ greetingName }: DashboardContentProps) {
           <EmptyState
             icon={Users}
             title="Još nemaš sačuvane primaoce"
-            description="Dodaj kredite, struju ili internet — i ubrzaj plaćanja."
+            description="Dodaj kredit, struju, internet ili šta već plaćaš svaki mesec."
             action={
               <Button asChild variant="brand">
                 <Link href="/recipients">
@@ -233,7 +234,7 @@ function Stat({
         <Icon className="size-4" />
       </div>
       <p
-        className={`text-lg font-semibold tracking-tight tabular-nums${truncate ? 'truncate' : ''}`}
+        className={cn('text-lg font-semibold tracking-tight tabular-nums', truncate && 'truncate')}
       >
         {value}
       </p>
@@ -278,12 +279,22 @@ function timeOfDayGreeting(): string {
 }
 
 function pluralRecipients(n: number) {
-  return n === 1 ? 'primaoca' : 'primalaca';
+  // 1 primaoca · 2-4 primaoca · 5+ primalaca (genitive plural)
+  return isPaucal(n) ? 'primaoca' : 'primalaca';
 }
 
 function pluralUplatnica(n: number) {
-  if (n === 1) return 'uplatnicu';
+  // 1 uplatnicu · 2-4 uplatnice · 5+ uplatnica
+  if (n % 10 === 1 && n % 100 !== 11) return 'uplatnicu';
+  if (isPaucal(n)) return 'uplatnice';
   return 'uplatnica';
+}
+
+function isPaucal(n: number): boolean {
+  const last = n % 10;
+  const last2 = n % 100;
+  if (last2 >= 11 && last2 <= 14) return false;
+  return last >= 1 && last <= 4;
 }
 
 interface UplatnicaItem {

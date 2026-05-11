@@ -97,7 +97,7 @@ export function RecipientList() {
           <EmptyState
             icon={Users}
             title="Još nema primalaca"
-            description="Dodaj banku, telefonskog operatera, ili naplatu komunalija — i potom generiši QR za sekundu."
+            description="Dodaj banku, telefonskog operatera ili naplatu komunalija — kad ti zatreba QR, otvoriš šablon i menjaš samo iznos."
             action={
               <Button variant="brand" onClick={openNew}>
                 <Plus className="size-4" />

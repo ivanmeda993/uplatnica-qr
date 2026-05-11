@@ -150,8 +150,8 @@ export default async function BankPage({ params }: PageProps) {
             Generiši svoj IPS QR za {bank.shortName} klijente.
           </h3>
           <p className="text-muted-foreground mt-2 text-sm">
-            Ako primaš uplate ili plaćaš redovne račune, sačuvaj uplatnicu jednom — generišeš QR za
-            par sekundi sledeći put.
+            Ako primaš uplate ili plaćaš redovne račune, sačuvaj uplatnicu jednom i sledeći put samo
+            otvoriš šablon.
           </p>
           <Button variant="brand" size="lg" asChild className="mt-5">
             <Link href="/register">

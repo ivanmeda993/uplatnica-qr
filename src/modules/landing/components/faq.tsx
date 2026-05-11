@@ -14,14 +14,12 @@ export function Faq() {
       className="mx-auto max-w-3xl scroll-mt-24 px-5 py-20"
     >
       <div className="mb-10 max-w-2xl">
-        <p className="text-brand mb-3 text-xs font-semibold tracking-wider uppercase">
-          Često pitanja
-        </p>
+        <p className="text-brand mb-3 text-xs font-semibold tracking-wider uppercase">FAQ</p>
         <h2
           id="faq-heading"
           className="font-display text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl"
         >
-          Sve što treba da znaš pre nego što počneš.
+          Često postavljana pitanja
         </h2>
       </div>
 

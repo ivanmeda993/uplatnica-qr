@@ -36,12 +36,12 @@ export function TryItDemo() {
           id="probaj-heading"
           className="font-display text-[clamp(1.85rem,3.4vw,2.75rem)] leading-tight font-semibold tracking-tight text-balance"
         >
-          Generiši svoj prvi NBS IPS QR sad
+          Generiši svoj prvi NBS IPS QR
         </h2>
         <p className="text-muted-foreground text-base text-pretty">
-          Iznos i primaoca smo već ubacili kao primer. Promeni šta želiš pa klikni{' '}
-          <span className="text-foreground font-medium">Generiši QR</span> — skeniraćeš ga sa mBank
-          aplikacijom za 2 sekunde.
+          Polja su popunjena kao primer. Promeni što ti treba pa klikni{' '}
+          <span className="text-foreground font-medium">Generiši QR</span> i odmah ga skeniraj mBank
+          aplikacijom.
         </p>
       </div>
 
@@ -60,8 +60,8 @@ export function TryItDemo() {
           <div className="flex-1 space-y-1">
             <p className="font-medium">Sviđa ti se? Sačuvaj kao šablon.</p>
             <p className="text-muted-foreground text-sm">
-              Sa nalogom ti je sledeći QR za istog primaoca samo dva klika dalje. Besplatno,
-              sinhronizovano na svim uređajima.
+              Sa nalogom ti je sledeći QR za istog primaoca dva klika dalje. Šabloni se sinhronizuju
+              između telefona i laptopa.
             </p>
           </div>
           <Button variant="brand" size="lg" asChild className="shrink-0">

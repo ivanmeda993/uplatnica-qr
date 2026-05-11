@@ -1,4 +1,4 @@
-import { Camera, Cloud, type LucideIcon,Moon, QrCode, Users, WifiOff } from 'lucide-react';
+import { Camera, Cloud, type LucideIcon, Moon, QrCode, Users, WifiOff } from 'lucide-react';
 
 interface Feature {
   icon: LucideIcon;
@@ -11,19 +11,19 @@ const FEATURES: ReadonlyArray<Feature> = [
     icon: Users,
     title: 'Šabloni sa bojama',
     description:
-      'Raiffeisen kredit, EPS struja, SBB internet — svaka uplatnica sačuvana sa nazivom, bojom i kategorijom.',
+      'Raiffeisen kredit, EPS struja, SBB internet — svaki primalac sačuvan sa svojim nazivom, bojom i kategorijom.',
   },
   {
     icon: QrCode,
-    title: 'NBS IPS QR u sekundi',
+    title: 'Validan NBS IPS QR',
     description:
-      'Validan format prema NBS specifikaciji (max 331 bajt, ECC level M). Radi sa svakom srpskom mBank aplikacijom.',
+      'Format prema NBS specifikaciji (max 331 bajt, ECC level M). Radi sa svakom srpskom mBank aplikacijom.',
   },
   {
     icon: Camera,
     title: 'Skeniranje kamerom',
     description:
-      'Dobio si štampanu uplatnicu? Uperi kameru — polja se automatski parsiraju i popune u formi.',
+      'Dobio si štampanu uplatnicu? Uperi kameru i polja se automatski parsiraju u formu.',
   },
   {
     icon: Cloud,
@@ -35,13 +35,12 @@ const FEATURES: ReadonlyArray<Feature> = [
     icon: WifiOff,
     title: 'Radi offline',
     description:
-      'PWA aplikacija — instalirana na telefon generiše QR i bez interneta. Dodaj na Home Screen i imaš ikonicu.',
+      'Instalirana kao PWA, aplikacija generiše QR i bez interneta. Dodaš je na Home Screen i imaš ikonicu kao i ostale.',
   },
   {
     icon: Moon,
     title: 'Light i dark mode',
-    description:
-      'Lepo izgleda u oba moda. Prati sistemsku temu ili biraš ručno. Visok kontrast za čitljivost po danu i noću.',
+    description: 'Lepo izgleda u oba režima. Prati sistemsku temu ili biraš ručno.',
   },
 ];
 
@@ -61,11 +60,11 @@ export function FeatureGrid() {
             id="funkcionalnosti-heading"
             className="font-display text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl"
           >
-            Sve što ti treba — ništa što ti ne treba.
+            Šta dobijaš sa nalogom.
           </h2>
           <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-            Bez reklama, bez analitike koja te prati, bez pretplata. Aplikacija pravi tačno jednu
-            stvar i pravi je dobro.
+            Bez reklama i bez analitike koja te prati. Pretplata ne postoji jer aplikaciju održavam
+            sam.
           </p>
         </div>
 

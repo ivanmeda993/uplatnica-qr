@@ -20,14 +20,14 @@ const CASES: ReadonlyArray<UseCase> = [
     icon: Lightbulb,
     tag: 'Komunalije',
     title: 'Struja, voda, grejanje',
-    example: 'EPS, JKP Vodovod, Beogradske elektrane — svaki mesec isto',
+    example: 'EPS, JKP Vodovod, Beogradske elektrane',
     color: 'text-sky-600 bg-sky-50 dark:bg-sky-900/30',
   },
   {
     icon: Wifi,
     tag: 'Pretplate',
     title: 'Internet, TV, mobilni',
-    example: 'SBB, Yettel, MTS, Telenor — fiksna mesečna pretplata',
+    example: 'SBB, Yettel, MTS, Telenor — fiksna mesečna rata',
     color: 'text-violet-600 bg-violet-50 dark:bg-violet-900/30',
   },
   {
@@ -48,7 +48,7 @@ const CASES: ReadonlyArray<UseCase> = [
     icon: School,
     tag: 'Vrtić i škola',
     title: 'Vrtić, školarine, ekskurzije',
-    example: 'Predškolska, privatne škole, fakulteti — isti račun po deci',
+    example: 'Predškolska, privatne škole, fakulteti — račun po detetu',
     color: 'text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30',
   },
 ];
@@ -68,7 +68,7 @@ export function UseCases() {
           id="primeri-heading"
           className="font-display text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl"
         >
-          Sve što plaćaš jednom mesečno — sačuvaj jednom.
+          Račune koje plaćaš svaki mesec uneseš samo prvi put.
         </h2>
       </div>
 

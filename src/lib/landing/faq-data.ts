@@ -10,7 +10,7 @@ export const FAQ: ReadonlyArray<FaqItem> = [
   },
   {
     q: 'Da li radi sa mojom bankom?',
-    a: 'Da. NBS IPS QR je nacionalni standard pa ga podržavaju sve srpske banke koje imaju mBank aplikaciju — Raiffeisen, Komercijalna, Banca Intesa, NLB, OTP, AIK, ProCredit, Erste, Eurobank Direktna, UniCredit, Halkbank i ostale.',
+    a: 'Da. NBS IPS QR je nacionalni standard, pa ga podržavaju sve srpske banke koje imaju mBank aplikaciju (Raiffeisen, Komercijalna, Banca Intesa, NLB, OTP, AIK, ProCredit, Erste, Eurobank Direktna, UniCredit, Halkbank i ostale).',
   },
   {
     q: 'Da li su moji podaci sigurni?',
@@ -22,11 +22,11 @@ export const FAQ: ReadonlyArray<FaqItem> = [
   },
   {
     q: 'Po čemu je bolje od fotografisanja uplatnice?',
-    a: 'Fotografija zahteva da banka prepozna polja kroz OCR — često greši kod modela 97 ili poziva na broj. IPS QR je strukturisan i validiran prema NBS specifikaciji, pa banka uvek dobija tačno onu uplatnicu koju si snimio. Plus, jednom uneta uplatnica generiše QR za 2 sekunde sledeći put.',
+    a: 'Fotografija zahteva da banka prepozna polja kroz OCR, što često greši kod modela 97 ili poziva na broj. IPS QR je strukturisan i validiran prema NBS specifikaciji, pa banka uvek dobija tačno onu uplatnicu koju si snimio. A jednom unetu uplatnicu kasnije otvaraš kao šablon.',
   },
   {
     q: 'Da li radi offline?',
-    a: 'Da. Aplikacija je PWA (Progressive Web App) sa service worker-om — jednom učitana, generisanje QR-a iz sačuvanih uplatnica radi bez interneta. Sinhronizacija novih uplatnica zahteva konekciju.',
+    a: 'Da. Aplikacija je PWA (Progressive Web App) sa service worker-om; jednom učitana, generisanje QR-a iz sačuvanih uplatnica radi bez interneta. Sinhronizacija novih uplatnica zahteva konekciju.',
   },
   {
     q: 'Da li mogu da skeniram tuđu uplatnicu?',
