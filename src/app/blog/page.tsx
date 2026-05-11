@@ -36,8 +36,8 @@ export default async function BlogIndexPage() {
             Vodiči o IPS QR plaćanjima u Srbiji
           </h1>
           <p className="text-muted-foreground mt-4 text-base leading-relaxed">
-            Šifre plaćanja, model poziva na broj, kako platiti struju ili Infostan QR kodom — bez
-            marketing fluff-a, samo praktične informacije.
+            Šifre plaćanja, model poziva na broj, kako platiti struju ili Infostan QR kodom.
+            Praktična uputstva, bez zavlačenja.
           </p>
         </div>
 

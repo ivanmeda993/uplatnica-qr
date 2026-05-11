@@ -58,7 +58,8 @@ export default function ToolsIndexPage() {
             Alati za IPS QR i srpske račune
           </h1>
           <p className="text-muted-foreground mt-4 text-base leading-relaxed">
-            Sve radi u browseru, bez registracije, bez slanja podataka serveru. Open-source.
+            Alati rade lokalno u browseru, bez registracije i bez slanja podataka serveru. Otvorenog
+            koda.
           </p>
         </div>
 

@@ -18,7 +18,7 @@ const STEPS: ReadonlyArray<Step> = [
     n: 2,
     icon: QrCode,
     title: 'Otvori i generiši QR',
-    body: 'Sledeći put kad treba da platiš — otvoriš šablon, eventualno promeniš iznos, i NBS IPS QR se prikaže na ekranu za 2 sekunde.',
+    body: 'Sledeći put kad treba da platiš, otvoriš šablon, po potrebi izmeniš iznos i dobiješ NBS IPS QR na ekranu.',
   },
   {
     n: 3,
@@ -41,7 +41,7 @@ export function HowItWorks() {
           id="kako-radi-heading"
           className="font-display text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl"
         >
-          Tri koraka. Bez kucanja brojeva računa, bez fotografisanja, bez OCR grešaka.
+          Tri koraka, bez kucanja 18 cifara.
         </h2>
       </div>
 

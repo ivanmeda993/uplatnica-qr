@@ -25,7 +25,7 @@ import { UseCases } from '@/modules/landing/components/use-cases';
 
 const HOME_TITLE = 'Generiši NBS IPS QR online — besplatno, bez naloga | Uplatnica QR';
 const HOME_DESCRIPTION =
-  'Besplatan online generator NBS IPS QR koda za uplatnice u Srbiji. Probaj odmah bez registracije — unesi iznos i račun, klikni Generiši, skeniraj sa Raiffeisen, Komercijalnom, Banca Intesa, NLB, OTP, AIK ili bilo kojom domaćom mBank aplikacijom.';
+  'Besplatan online generator NBS IPS QR koda za uplatnice u Srbiji. Probaš odmah, bez registracije: uneseš iznos i račun, klikneš Generiši i skeniraš sa Raiffeisen, Komercijalnom, Banca Intesa, NLB, OTP, AIK ili bilo kojom domaćom mBank aplikacijom.';
 
 export const metadata: Metadata = {
   title: {

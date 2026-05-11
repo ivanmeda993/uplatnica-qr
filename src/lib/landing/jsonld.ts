@@ -165,7 +165,7 @@ export function homeHowToLd() {
     '@type': 'HowTo',
     name: 'Kako napraviti NBS IPS QR za uplatnicu',
     description:
-      'Generiši validan NBS IPS QR kod za uplatnicu u Srbiji za nekoliko sekundi, bez registracije. QR skeniraš sa bilo kojom domaćom mBank aplikacijom.',
+      'Generiši validan NBS IPS QR kod za uplatnicu u Srbiji, bez registracije. QR skeniraš sa bilo kojom domaćom mBank aplikacijom.',
     inLanguage: 'sr-Latn-RS',
     totalTime: 'PT30S',
     tool: [{ '@type': 'HowToTool', name: 'Web pregledač ili mobilni telefon' }],

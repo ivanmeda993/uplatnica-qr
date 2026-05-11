@@ -113,10 +113,10 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <div className="bg-mesh-soft border-border mt-12 rounded-3xl border p-8">
           <h3 className="text-foreground font-display text-2xl font-semibold tracking-tight">
-            Generiši svoj IPS QR za 30 sekundi.
+            Generiši svoj IPS QR
           </h3>
           <p className="text-muted-foreground mt-2 text-sm">
-            Sačuvaj uplatnicu jednom — generišeš QR svaki sledeći put. Besplatno, bez reklama.
+            Sačuvaš uplatnicu jednom i sledeće mesece samo otvoriš šablon. Besplatno i bez reklama.
           </p>
           <Button variant="brand" size="lg" asChild className="mt-5">
             <Link href="/register">

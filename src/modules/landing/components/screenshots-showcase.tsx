@@ -14,17 +14,17 @@ interface MockupItem {
 const MOCKUPS: ReadonlyArray<MockupItem> = [
   {
     label: 'Početna',
-    caption: 'Sve uplatnice na jednom mestu, sa bojama i kategorijama.',
+    caption: 'Tvoji primaoci i poslednje uplatnice na jednom ekranu.',
     node: <MockupDashboard />,
   },
   {
     label: 'Generisanje',
-    caption: 'Validan NBS IPS QR sa svim poljima — spreman za skeniranje.',
+    caption: 'NBS IPS QR sa svim poljima popunjen prema specifikaciji.',
     node: <MockupGenerate />,
   },
   {
     label: 'Skeniranje',
-    caption: 'Uperi kameru na štampanu uplatnicu — polja se same popune.',
+    caption: 'Uperi kameru na štampanu uplatnicu i polja se sama popune.',
     node: <MockupScan />,
   },
 ];
@@ -45,7 +45,7 @@ export function ScreenshotsShowcase() {
             id="kako-izgleda-heading"
             className="font-display text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl"
           >
-            Mali alat — lak za jednu ruku, dizajniran za telefon.
+            Pravljeno prvo za telefon, radi i na laptopu.
           </h2>
         </div>
 

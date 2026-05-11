@@ -10,8 +10,8 @@ export function LandingFooter() {
         <div className="space-y-3">
           <Logo withWordmark />
           <p className="text-muted-foreground max-w-sm text-xs leading-relaxed">
-            Lični alat za srpske uplatnice. Generisanje i skeniranje NBS IPS QR koda u sekundi.
-            Besplatno, otvorenog koda, bez reklama.
+            Lični alat za srpske uplatnice. Generisanje i skeniranje NBS IPS QR koda. Besplatno,
+            otvorenog koda i bez reklama.
           </p>
         </div>
         <nav aria-label="Resursi" className="space-y-2 text-xs">

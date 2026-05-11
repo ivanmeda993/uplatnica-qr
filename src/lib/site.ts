@@ -9,7 +9,7 @@ export const SITE = {
   shortName: 'Uplatnica',
   title: 'Uplatnica QR — generiši NBS IPS QR online, besplatno i bez naloga',
   description:
-    'Generiši NBS IPS QR za uplatnicu online za 2 sekunde — bez registracije i bez reklama. Sačuvaj kredit, struju, internet, kiriju kao šablone i skeniraj sa Raiffeisen, Komercijalnom, Banca Intesa, NLB, OTP, AIK i ostalim mBank aplikacijama. Radi i offline kao PWA.',
+    'Generiši NBS IPS QR za uplatnicu online, bez registracije i bez reklama. Sačuvaj kredit, struju, internet, kiriju kao šablone i skeniraj sa Raiffeisen, Komercijalnom, Banca Intesa, NLB, OTP, AIK i ostalim mBank aplikacijama. Radi i offline kao PWA.',
   locale: 'sr_RS',
   twitterHandle: undefined as string | undefined,
 } as const;

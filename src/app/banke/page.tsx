@@ -33,7 +33,7 @@ export default function BankIndexPage() {
             Skeniranje IPS QR po bankama
           </h1>
           <p className="text-muted-foreground mt-4 text-base leading-relaxed">
-            Tačan postupak za svaku srpsku mBank aplikaciju — koraci, putanje u meniju, česti
+            Tačan postupak za svaku srpsku mBank aplikaciju: koraci, putanje u meniju i česti
             problemi po banci.
           </p>
         </div>

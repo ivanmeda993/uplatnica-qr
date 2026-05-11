@@ -16,9 +16,9 @@ export function Hero() {
             NBS IPS QR · besplatno
           </Badge>
           <h1 className="font-display text-[clamp(2.5rem,6.5vw,4.75rem)] leading-[1.02] font-semibold tracking-tight text-balance">
-            Plati račun u Srbiji za{' '}
+            Plati račun{' '}
             <span className="relative inline-block">
-              <span className="relative z-10">2 sekunde</span>
+              <span className="relative z-10">bez kucanja</span>
               <span
                 aria-hidden
                 className="bg-brand/35 absolute inset-x-0 bottom-1 -z-0 h-3 rounded-full sm:bottom-2 sm:h-4"
@@ -27,12 +27,12 @@ export function Hero() {
             .
           </h1>
           <p className="text-muted-foreground max-w-xl text-base text-pretty sm:text-lg">
-            Sačuvaj svoje redovne uplatnice — struja, internet, komunalije, kredit, kirija — i
-            generiši NBS IPS QR kod za par sekundi. Skeniraš sa{' '}
+            Sačuvaj uplatnice koje plaćaš svaki mesec (struja, internet, kredit, kirija) i generiši
+            NBS IPS QR kad ti zatreba. Skeniraš sa{' '}
             <strong className="text-foreground">Raiffeisen</strong>,{' '}
             <strong className="text-foreground">Komercijalnom</strong>,{' '}
             <strong className="text-foreground">Banca Intesa</strong>, NLB, OTP, AIK i ostalim
-            srpskim mBank aplikacijama.
+            domaćim mBank aplikacijama.
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="brand" size="xl" asChild>
@@ -48,11 +48,11 @@ export function Hero() {
           <div className="text-muted-foreground flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-xs">
             <span className="inline-flex items-center gap-1.5">
               <ShieldCheck className="text-brand size-3.5" />
-              Tvoji podaci ostaju samo na tvom nalogu
+              Podaci ostaju samo na tvom nalogu
             </span>
             <span className="inline-flex items-center gap-1.5">
               <Zap className="text-brand size-3.5" />
-              PWA — radi i offline na telefonu
+              PWA, radi i bez interneta
             </span>
           </div>
         </div>
