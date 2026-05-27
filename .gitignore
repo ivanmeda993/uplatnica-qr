@@ -61,3 +61,4 @@ prisma/dev.db-journal
 
 # vercel
 .vercel
+.env*
