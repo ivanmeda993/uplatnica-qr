@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth';
 
 import { historyRouter } from './history';
 import { recipientsRouter } from './recipients';
+import { settingsRouter } from './settings';
 import { uplatniceRouter } from './uplatnice';
 
 /**
@@ -14,7 +15,9 @@ import { uplatniceRouter } from './uplatnice';
  */
 export const app = new Elysia({ prefix: '/api' })
   .all('/auth/*', ({ request }) => auth.handler(request))
-  .group('/v1', (group) => group.use(recipientsRouter).use(uplatniceRouter).use(historyRouter))
+  .group('/v1', (group) =>
+    group.use(recipientsRouter).use(uplatniceRouter).use(historyRouter).use(settingsRouter)
+  )
   .onError(({ code, error, set }) => {
     if (code === 'VALIDATION') {
       set.status = 400;

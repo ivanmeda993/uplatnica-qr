@@ -17,4 +17,8 @@ export const qk = {
     all: ['history'] as const,
     list: () => [...qk.history.all, 'list'] as const,
   },
+  settings: {
+    all: ['settings'] as const,
+    detail: () => [...qk.settings.all, 'detail'] as const,
+  },
 } as const;

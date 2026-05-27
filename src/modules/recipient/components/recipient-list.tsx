@@ -60,7 +60,7 @@ export function RecipientList() {
               ? `${recipientsQuery.data.length} sačuvanih primalaca.`
               : 'Sačuvaj primaoce koje često plaćaš da uštediš vreme.'}
           </p>
-          <Button variant="brand" size="sm" onClick={openNew}>
+          <Button variant="brand" size="sm" onClick={openNew} aria-label="Dodaj primaoca">
             <Plus className="size-4" />
             <span className="hidden sm:inline">Dodaj</span>
           </Button>

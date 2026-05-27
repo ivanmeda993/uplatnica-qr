@@ -39,6 +39,7 @@ export default function ScanPage() {
           qrPayload={qrPayload}
           onQrPayload={setQrPayload}
           hideRecipientSelect
+          enablePayerDefaults={false}
         />
       )}
     </div>

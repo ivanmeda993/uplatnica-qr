@@ -11,19 +11,20 @@ datasource db {
 // ─────────────────────────────────────────
 
 model User {
-  id            String    @id
-  email         String    @unique
-  emailVerified Boolean   @default(false)
+  id            String   @id
+  email         String   @unique
+  emailVerified Boolean  @default(false)
   name          String
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  sessions     Session[]
-  accounts     Account[]
-  recipients   Recipient[]
-  uplatnice    Uplatnica[]
-  history      PaymentHistory[]
+  sessions   Session[]
+  accounts   Account[]
+  recipients Recipient[]
+  uplatnice  Uplatnica[]
+  history    PaymentHistory[]
+  settings   UserSettings?
 
   @@map("user")
 }
@@ -84,29 +85,31 @@ model Verification {
 
 /// Reusable recipient template (npr. "Komercijalna kredit", "Raiffeisen kredit")
 model Recipient {
-  id        String   @id @default(cuid())
-  userId    String
+  id            String   @id @default(cuid())
+  userId        String
   /// Display name (npr. "Komercijalna kredit")
-  label     String
+  label         String
   /// Naziv primaoca u QR-u, max 70 chars
-  name      String
+  name          String
+  /// Adresa primaoca u QR-u, spaja se sa nazivom u N polje
+  address       String?
   /// 18-cifreni račun bez crta i razmaka
-  account   String
+  account       String
   /// Default svrha plaćanja
-  purpose   String?
+  purpose       String?
   /// Šifra plaćanja (3 cifre)
-  paymentCode String?
+  paymentCode   String?
   /// Default model + poziv na broj (model je prve 2 cifre, npr. 97...)
-  reference String?
+  reference     String?
   /// Default iznos (string radi tačnosti decimale, npr "8612,80")
   defaultAmount String?
   /// Boja u UI (hex), za vizuelno razlikovanje liste
-  color     String?
+  color         String?
   /// Sortiranje u UI listi
-  sortOrder Int      @default(0)
-  archived  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  sortOrder     Int      @default(0)
+  archived      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   uplatnice Uplatnica[]
@@ -115,30 +118,44 @@ model Recipient {
   @@map("recipient")
 }
 
+/// App-specific settings for one signed-in user.
+model UserSettings {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  defaultPayerName    String?
+  defaultPayerAddress String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+}
+
 /// Konkretna uplatnica (instance kreirana iz Recipient template-a, ili ad-hoc)
 model Uplatnica {
-  id           String   @id @default(cuid())
-  userId       String
-  recipientId  String?
+  id          String  @id @default(cuid())
+  userId      String
+  recipientId String?
 
   /// Snapshot polja u trenutku kreiranja (recipient može da se izmeni kasnije)
-  payerName    String?
-  payerAddress String?
-  recipientName String
+  payerName        String?
+  payerAddress     String?
+  recipientName    String
   recipientAddress String?
-  account      String
-  purpose      String?
-  paymentCode  String?
-  reference    String?
+  account          String
+  purpose          String?
+  paymentCode      String?
+  reference        String?
   /// String radi tačnosti decimale (npr "8612,80"); valuta je uvek RSD
-  amount       String
+  amount           String
   /// Generisani IPS QR string (cache za brzo prikazivanje)
-  qrPayload    String   @db.Text
+  qrPayload        String  @db.Text
 
   createdAt DateTime @default(now())
 
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  recipient Recipient? @relation(fields: [recipientId], references: [id], onDelete: SetNull)
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipient Recipient?       @relation(fields: [recipientId], references: [id], onDelete: SetNull)
   payments  PaymentHistory[]
 
   @@index([userId, createdAt(sort: Desc)])

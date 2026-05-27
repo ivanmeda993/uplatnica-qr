@@ -1,7 +1,7 @@
 'use client';
 
 import { Check, ChevronsUpDown, Pencil, X } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useId, useMemo, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/command';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { PAYMENT_CODES, POPULAR_CODES, type PaymentCode } from '@/lib/payment-codes/data';
+import { PAYMENT_CODES, type PaymentCode, POPULAR_CODES } from '@/lib/payment-codes/data';
 import { cn } from '@/lib/utils';
 
 const GROUP_LABELS: Record<PaymentCode['group'], string> = {
@@ -49,19 +49,15 @@ interface PaymentCodeFieldProps {
  * 3-digit Input (any code 100-999 is technically allowed by NBS).
  */
 export function PaymentCodeField({ value, onChange, disabled }: PaymentCodeFieldProps) {
+  const listId = useId();
   const knownCode = useMemo(
     () => (value ? PAYMENT_CODES.find((c) => c.code === value) : undefined),
     [value]
   );
   const startsManual = Boolean(value) && !knownCode;
-  const [manual, setManual] = useState(startsManual);
+  const [manualMode, setManualMode] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (manual && value && PAYMENT_CODES.some((c) => c.code === value)) {
-      setManual(false);
-    }
-  }, [manual, value]);
+  const manual = manualMode || startsManual;
 
   if (manual) {
     return (
@@ -72,7 +68,13 @@ export function PaymentCodeField({ value, onChange, disabled }: PaymentCodeField
           placeholder="npr. 289"
           className="font-mono"
           value={value ?? ''}
-          onChange={(e) => onChange(e.target.value.replace(/\D/g, '').slice(0, 3))}
+          onChange={(e) => {
+            const nextValue = e.target.value.replace(/\D/g, '').slice(0, 3);
+            onChange(nextValue);
+            if (PAYMENT_CODES.some((c) => c.code === nextValue)) {
+              setManualMode(false);
+            }
+          }}
           disabled={disabled}
         />
         <Button
@@ -80,7 +82,7 @@ export function PaymentCodeField({ value, onChange, disabled }: PaymentCodeField
           variant="ghost"
           size="iconSm"
           onClick={() => {
-            setManual(false);
+            setManualMode(false);
             onChange('');
           }}
           aria-label="Vrati na listu šifara"
@@ -100,6 +102,7 @@ export function PaymentCodeField({ value, onChange, disabled }: PaymentCodeField
           variant="outline"
           role="combobox"
           aria-expanded={open}
+          aria-controls={listId}
           disabled={disabled}
           className={cn(
             'h-10 w-full justify-between px-3 font-normal',
@@ -125,7 +128,7 @@ export function PaymentCodeField({ value, onChange, disabled }: PaymentCodeField
           }}
         >
           <CommandInput placeholder="Pretraži po šifri ili nazivu…" />
-          <CommandList>
+          <CommandList id={listId}>
             <CommandEmpty>
               <div className="space-y-2 px-3 py-4">
                 <p className="text-muted-foreground text-sm">Nema rezultata.</p>
@@ -134,7 +137,7 @@ export function PaymentCodeField({ value, onChange, disabled }: PaymentCodeField
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    setManual(true);
+                    setManualMode(true);
                     setOpen(false);
                     onChange('');
                   }}
@@ -199,7 +202,7 @@ export function PaymentCodeField({ value, onChange, disabled }: PaymentCodeField
               <CommandItem
                 value="__manual__ unesi rucno custom šifra"
                 onSelect={() => {
-                  setManual(true);
+                  setManualMode(true);
                   setOpen(false);
                   onChange('');
                 }}

@@ -48,6 +48,7 @@ export function RecipientSheet({ open, onOpenChange, recipient }: RecipientSheet
               ? {
                   label: recipient.label,
                   name: recipient.name,
+                  address: recipient.address ?? '',
                   account: recipient.account,
                   reference: recipient.reference ?? '',
                   defaultAmount: recipient.defaultAmount ?? '',

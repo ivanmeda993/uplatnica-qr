@@ -7,7 +7,11 @@ import { UplatnicaForm } from '@/modules/uplatnica/components/uplatnica-form';
 
 export default function GeneratePage() {
   const [recipientId, setRecipientId] = useQueryState('recipientId', parseAsString.withDefault(''));
-  const [qrPayload, setQrPayload] = useState<string | null>(null);
+  const [qrState, setQrState] = useState<{ recipientId: string; payload: string | null }>({
+    recipientId: '',
+    payload: null,
+  });
+  const qrPayload = qrState.recipientId === recipientId ? qrState.payload : null;
 
   return (
     <div className="space-y-6">
@@ -22,7 +26,7 @@ export default function GeneratePage() {
         selectedRecipientId={recipientId || undefined}
         onRecipientChange={(id) => setRecipientId(id)}
         qrPayload={qrPayload}
-        onQrPayload={setQrPayload}
+        onQrPayload={(payload) => setQrState({ recipientId, payload })}
       />
     </div>
   );

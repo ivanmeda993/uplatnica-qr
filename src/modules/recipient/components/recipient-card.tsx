@@ -20,6 +20,7 @@ export interface RecipientItem {
   id: string;
   label: string;
   name: string;
+  address: string | null;
   account: string;
   reference: string | null;
   defaultAmount: string | null;

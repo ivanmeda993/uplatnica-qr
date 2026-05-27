@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { combineIpsLines, isWithinIpsNameFieldLimit, utf8ByteLength } from './limits';
+
 /**
  * Zod schemas for IPS QR input.
  * These represent USER INPUT before normalization — flexible accepts.
@@ -38,42 +40,63 @@ const paymentCodeInput = trimmed
 /** Reference: digits, optionally with dashes (except model 97). */
 const referenceInput = trimmed.max(35, 'Poziv na broj je predugačak').optional().or(z.literal(''));
 
-export const recipientFormSchema = z.object({
-  label: trimmed.min(1, 'Naziv šablona je obavezan').max(50),
-  name: trimmed.min(1, 'Ime primaoca je obavezno').max(70),
-  account: accountInput,
-  purpose: trimmed.max(35).optional().or(z.literal('')),
-  paymentCode: paymentCodeInput,
-  reference: referenceInput,
-  defaultAmount: trimmed.optional().or(z.literal('')),
-  color: trimmed
-    .regex(/^#[0-9a-fA-F]{6}$/)
-    .optional()
-    .or(z.literal('')),
-});
+export const recipientFormSchema = z
+  .object({
+    label: trimmed.min(1, 'Naziv šablona je obavezan').max(50),
+    name: trimmed.min(1, 'Ime primaoca je obavezno').max(70),
+    address: trimmed.max(70).optional().or(z.literal('')),
+    account: accountInput,
+    purpose: trimmed.max(35).optional().or(z.literal('')),
+    paymentCode: paymentCodeInput,
+    reference: referenceInput,
+    defaultAmount: trimmed.optional().or(z.literal('')),
+    color: trimmed
+      .regex(/^#[0-9a-fA-F]{6}$/)
+      .optional()
+      .or(z.literal('')),
+  })
+  .refine((value) => isWithinIpsNameFieldLimit(combineIpsLines([value.name, value.address])), {
+    path: ['address'],
+    message: 'Naziv i adresa primaoca zajedno ne smeju preći 70 UTF-8 bajtova',
+  });
 
-export const uplatnicaFormSchema = z.object({
-  recipientId: z.string().cuid().optional().or(z.literal('')),
+export const uplatnicaFormSchema = z
+  .object({
+    recipientId: z.string().cuid().optional().or(z.literal('')),
 
-  payerName: trimmed.max(70).optional().or(z.literal('')),
-  payerAddress: trimmed.max(70).optional().or(z.literal('')),
+    payerName: trimmed.max(70).optional().or(z.literal('')),
+    payerAddress: trimmed.max(70).optional().or(z.literal('')),
 
-  recipientName: trimmed.min(1, 'Ime primaoca je obavezno').max(70),
-  recipientAddress: trimmed.max(70).optional().or(z.literal('')),
-  account: accountInput,
-  purpose: trimmed.max(35).optional().or(z.literal('')),
-  paymentCode: paymentCodeInput,
-  reference: referenceInput,
-  amount: amountInput,
-});
+    recipientName: trimmed.min(1, 'Ime primaoca je obavezno').max(70),
+    recipientAddress: trimmed.max(70).optional().or(z.literal('')),
+    account: accountInput,
+    purpose: trimmed.max(35).optional().or(z.literal('')),
+    paymentCode: paymentCodeInput,
+    reference: referenceInput,
+    amount: amountInput,
+  })
+  .refine(
+    (value) =>
+      isWithinIpsNameFieldLimit(combineIpsLines([value.recipientName, value.recipientAddress])),
+    {
+      path: ['recipientAddress'],
+      message: 'Naziv i adresa primaoca zajedno ne smeju preći 70 UTF-8 bajtova',
+    }
+  )
+  .refine(
+    (value) => isWithinIpsNameFieldLimit(combineIpsLines([value.payerName, value.payerAddress])),
+    {
+      path: ['payerAddress'],
+      message: 'Uplatilac i adresa zajedno ne smeju preći 70 UTF-8 bajtova',
+    }
+  );
 
 export type RecipientFormInput = z.infer<typeof recipientFormSchema>;
 export type UplatnicaFormInput = z.infer<typeof uplatnicaFormSchema>;
 
 /** UTF-8 byte length (NBS spec measures in bytes, not JS code units). */
-const utf8Bytes = (v: string) => new TextEncoder().encode(v).byteLength;
 const maxUtf8Bytes = (max: number, label: string) =>
-  z.string().refine((v) => utf8Bytes(v) <= max, {
+  z.string().refine((v) => utf8ByteLength(v) <= max, {
     message: `${label} ne sme biti duži od ${max} bajtova (UTF-8)`,
   });
 

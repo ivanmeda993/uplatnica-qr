@@ -9,16 +9,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { signOut, useSession } from '@/lib/auth-client';
 import { cn } from '@/lib/utils';
+import { PayerSettingsCard } from '@/modules/settings/components/payer-settings-card';
 
 export default function SettingsPage() {
-  const router = useRouter();
+  const { push, refresh } = useRouter();
   const { data: session } = useSession();
   const { theme, setTheme } = useTheme();
 
   async function onSignOut() {
     await signOut();
-    router.push('/login');
-    router.refresh();
+    push('/login');
+    refresh();
   }
 
   const themes = [
@@ -33,6 +34,8 @@ export default function SettingsPage() {
         <h1 className="text-3xl font-semibold tracking-tight">Podešavanja</h1>
         <p className="text-muted-foreground text-sm">Personalizuj iskustvo i upravljaj nalogom.</p>
       </header>
+
+      <PayerSettingsCard />
 
       <Card>
         <CardHeader>
@@ -65,6 +68,7 @@ export default function SettingsPage() {
               const active = theme === t.id;
               return (
                 <button
+                  type="button"
                   key={t.id}
                   onClick={() => setTheme(t.id)}
                   className={cn(

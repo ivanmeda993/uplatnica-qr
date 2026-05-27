@@ -1,6 +1,12 @@
 import { Elysia, t } from 'elysia';
 
+import { combineIpsLines, isWithinIpsNameFieldLimit } from '@/lib/ips-qr/limits';
+
 import { authContext } from './context';
+
+function recipientFitsIpsLimit(name: string, address: string | undefined) {
+  return isWithinIpsNameFieldLimit(combineIpsLines([name, address]));
+}
 
 export const recipientsRouter = new Elysia({ prefix: '/recipients' })
   .use(authContext)
@@ -13,12 +19,20 @@ export const recipientsRouter = new Elysia({ prefix: '/recipients' })
   })
   .post(
     '/',
-    async ({ body, user, prisma }) => {
+    async ({ body, user, prisma, status }) => {
+      if (!recipientFitsIpsLimit(body.name, body.address)) {
+        return status(400, {
+          error: 'Naziv i adresa primaoca zajedno ne smeju preći 70 UTF-8 bajtova',
+          code: 'IPS_FIELD_TOO_LONG',
+        });
+      }
+
       const recipient = await prisma.recipient.create({
         data: {
           userId: user.id,
           label: body.label,
           name: body.name,
+          address: body.address ?? null,
           account: body.account,
           purpose: body.purpose ?? null,
           paymentCode: body.paymentCode ?? null,
@@ -33,6 +47,7 @@ export const recipientsRouter = new Elysia({ prefix: '/recipients' })
       body: t.Object({
         label: t.String({ minLength: 1, maxLength: 50 }),
         name: t.String({ minLength: 1, maxLength: 70 }),
+        address: t.Optional(t.String({ maxLength: 70 })),
         account: t.String({ pattern: '^\\d{18}$' }),
         purpose: t.Optional(t.String({ maxLength: 35 })),
         paymentCode: t.Optional(t.String({ pattern: '^\\d{3}$' })),
@@ -51,11 +66,19 @@ export const recipientsRouter = new Elysia({ prefix: '/recipients' })
       });
       if (!existing) return status(404, { error: 'Nije pronađeno', code: 'NOT_FOUND' });
 
+      if (!recipientFitsIpsLimit(body.name, body.address)) {
+        return status(400, {
+          error: 'Naziv i adresa primaoca zajedno ne smeju preći 70 UTF-8 bajtova',
+          code: 'IPS_FIELD_TOO_LONG',
+        });
+      }
+
       const recipient = await prisma.recipient.update({
         where: { id: params.id },
         data: {
           label: body.label,
           name: body.name,
+          address: body.address ?? null,
           account: body.account,
           purpose: body.purpose ?? null,
           paymentCode: body.paymentCode ?? null,
@@ -71,6 +94,7 @@ export const recipientsRouter = new Elysia({ prefix: '/recipients' })
       body: t.Object({
         label: t.String({ minLength: 1, maxLength: 50 }),
         name: t.String({ minLength: 1, maxLength: 70 }),
+        address: t.Optional(t.String({ maxLength: 70 })),
         account: t.String({ pattern: '^\\d{18}$' }),
         purpose: t.Optional(t.String({ maxLength: 35 })),
         paymentCode: t.Optional(t.String({ pattern: '^\\d{3}$' })),

@@ -18,7 +18,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { api } from '@/lib/api-client';
+import { getApiErrorMessage } from '@/lib/api-error';
 import { getBankByAccount } from '@/lib/banks/data';
 import { type RecipientFormInput, recipientFormSchema } from '@/lib/ips-qr';
 import { normalizeAccount } from '@/lib/ips-qr';
@@ -42,6 +44,7 @@ export function RecipientForm({ recipientId, defaultValues, onSuccess }: Recipie
     defaultValues: {
       label: '',
       name: '',
+      address: '',
       account: '',
       reference: '',
       defaultAmount: '',
@@ -57,6 +60,7 @@ export function RecipientForm({ recipientId, defaultValues, onSuccess }: Recipie
       const body = {
         label: values.label,
         name: values.name,
+        address: values.address || undefined,
         account: normalizeAccount(values.account),
         purpose: values.purpose || undefined,
         paymentCode: values.paymentCode || undefined,
@@ -66,11 +70,11 @@ export function RecipientForm({ recipientId, defaultValues, onSuccess }: Recipie
       };
       if (recipientId) {
         const res = await api.api.v1.recipients({ id: recipientId }).patch(body);
-        if (res.error) throw new Error(String(res.error.value));
+        if (res.error) throw new Error(getApiErrorMessage(res.error));
         return res.data?.recipient;
       }
       const res = await api.api.v1.recipients.post(body);
-      if (res.error) throw new Error(String(res.error.value));
+      if (res.error) throw new Error(getApiErrorMessage(res.error));
       return res.data?.recipient;
     },
     onSuccess: () => {
@@ -153,6 +157,25 @@ export function RecipientForm({ recipientId, defaultValues, onSuccess }: Recipie
                 <Input placeholder="Ljubica Petrović" {...field} />
               </FormControl>
               <FormDescription>Ide u IPS QR kao polje N (max 70 znakova).</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="address"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Adresa primaoca</FormLabel>
+              <FormControl>
+                <Textarea
+                  rows={2}
+                  placeholder={'Bulevar kralja Aleksandra 1\n11000 Beograd'}
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>Popunjava adresu primaoca u IPS QR polju N.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

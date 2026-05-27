@@ -29,6 +29,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { api } from '@/lib/api-client';
+import { getApiErrorMessage } from '@/lib/api-error';
 import { getBankByAccount } from '@/lib/banks/data';
 import {
   encodeUplatnica,
@@ -48,6 +49,7 @@ interface RecipientOption {
   id: string;
   label: string;
   name: string;
+  address: string | null;
   account: string;
   reference: string | null;
   defaultAmount: string | null;
@@ -64,6 +66,8 @@ interface UplatnicaFormProps {
   onQrPayload: (payload: string | null) => void;
   /** Hide the recipient select (e.g. on /scan page) */
   hideRecipientSelect?: boolean;
+  /** Enable account-level payer defaults. Pass false for scan flows. */
+  enablePayerDefaults?: boolean;
   /**
    * Anonymous demo mode for the public landing page.
    * Hides the template card + save mutation, shows a single "Generate" button,
@@ -80,6 +84,7 @@ export function UplatnicaForm({
   onQrPayload,
   hideRecipientSelect,
   anonymous = false,
+  enablePayerDefaults = !anonymous,
 }: UplatnicaFormProps) {
   const queryClient = useQueryClient();
   const hideTemplate = anonymous || hideRecipientSelect;
@@ -92,6 +97,21 @@ export function UplatnicaForm({
       return (res.data?.items ?? []) as RecipientOption[];
     },
     enabled: !hideTemplate,
+  });
+
+  const payerSettingsQuery = useQuery({
+    queryKey: qk.settings.detail(),
+    queryFn: async () => {
+      const res = await api.api.v1.settings.get();
+      if (res.error) throw new Error(getApiErrorMessage(res.error));
+      return (
+        res.data?.settings ?? {
+          defaultPayerName: '',
+          defaultPayerAddress: '',
+        }
+      );
+    },
+    enabled: enablePayerDefaults,
   });
 
   const form = useForm<UplatnicaFormInput>({
@@ -111,6 +131,26 @@ export function UplatnicaForm({
     },
   });
 
+  const payerDefaultsAppliedRef = useRef(false);
+
+  useEffect(() => {
+    if (!enablePayerDefaults || payerDefaultsAppliedRef.current || !payerSettingsQuery.data) return;
+
+    const { defaultPayerName, defaultPayerAddress } = payerSettingsQuery.data;
+    let changed = false;
+    if (!form.getValues('payerName') && defaultPayerName) {
+      form.setValue('payerName', defaultPayerName);
+      changed = true;
+    }
+    if (!form.getValues('payerAddress') && defaultPayerAddress) {
+      form.setValue('payerAddress', defaultPayerAddress);
+      changed = true;
+    }
+    if (changed) onQrPayload(null);
+
+    payerDefaultsAppliedRef.current = true;
+  }, [enablePayerDefaults, form, onQrPayload, payerSettingsQuery.data]);
+
   // Prefill from selected recipient
   useEffect(() => {
     if (!selectedRecipientId || !recipientsQuery.data) return;
@@ -121,16 +161,14 @@ export function UplatnicaForm({
       payerName: form.getValues('payerName'),
       payerAddress: form.getValues('payerAddress'),
       recipientName: r.name,
-      recipientAddress: '',
+      recipientAddress: r.address ?? '',
       account: r.account,
       purpose: r.purpose ?? '',
       paymentCode: r.paymentCode ?? '',
       reference: r.reference ?? '',
       amount: r.defaultAmount ?? '',
     });
-    onQrPayload(null);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedRecipientId, recipientsQuery.data]);
+  }, [form, recipientsQuery.data, selectedRecipientId]);
 
   const qrCardRef = useRef<HTMLDivElement>(null);
 
@@ -157,7 +195,7 @@ export function UplatnicaForm({
         reference: values.reference || undefined,
         amount: values.amount,
       });
-      if (res.error) throw new Error(String(res.error.value));
+      if (res.error) throw new Error(getApiErrorMessage(res.error));
       return { qrString, uplatnica: res.data?.uplatnica };
     },
     onSuccess: ({ qrString }) => {
@@ -201,7 +239,10 @@ export function UplatnicaForm({
           <CardContent>
             <Select
               value={selectedRecipientId || undefined}
-              onValueChange={(v) => onRecipientChange?.(v)}
+              onValueChange={(v) => {
+                onRecipientChange?.(v);
+                onQrPayload(null);
+              }}
               disabled={recipientsQuery.isLoading}
             >
               <SelectTrigger className="bg-card">
@@ -431,7 +472,7 @@ export function UplatnicaForm({
                     <FormItem>
                       <FormLabel>Adresa uplatioca</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Textarea rows={2} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
