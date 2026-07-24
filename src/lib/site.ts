@@ -15,8 +15,12 @@ export const SITE = {
 } as const;
 
 export const AUTHOR = {
+  id: 'https://ivanmilicevic.dev/#person',
   name: 'Ivan Milićević',
   url: 'https://ivanmilicevic.dev/',
+  // Replace this fallback with /work/ips-uplatnica once the case study returns HTTP 200.
+  caseStudyUrl: 'https://ivanmilicevic.dev/#work',
+  email: 'ivanmilicevicmeda@gmail.com',
   jobTitle: 'Senior Full-Stack Developer',
   sameAs: [
     'https://ivanmilicevic.dev/',

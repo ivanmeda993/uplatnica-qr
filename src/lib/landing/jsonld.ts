@@ -2,12 +2,19 @@ import { AUTHOR, getSiteUrl, SITE } from '@/lib/site';
 
 import { FAQ } from './faq-data';
 
+function authorIdentityLd() {
+  return {
+    '@type': 'Person',
+    '@id': AUTHOR.id,
+    name: AUTHOR.name,
+    url: AUTHOR.url,
+  };
+}
+
 export function personLd() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: AUTHOR.name,
-    url: AUTHOR.url,
+    ...authorIdentityLd(),
     jobTitle: AUTHOR.jobTitle,
     sameAs: AUTHOR.sameAs,
   };
@@ -25,11 +32,7 @@ export function softwareApplicationLd() {
     operatingSystem: 'Web Browser, iOS, Android',
     inLanguage: 'sr-Latn-RS',
     isAccessibleForFree: true,
-    author: {
-      '@type': 'Person',
-      name: AUTHOR.name,
-      url: AUTHOR.url,
-    },
+    author: authorIdentityLd(),
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -56,11 +59,7 @@ export function organizationLd() {
     name: SITE.name,
     url: base,
     logo: `${base}/icons/icon-512.png`,
-    founder: {
-      '@type': 'Person',
-      name: AUTHOR.name,
-      url: AUTHOR.url,
-    },
+    founder: authorIdentityLd(),
   };
 }
 
@@ -103,11 +102,7 @@ export function articleLd(post: {
     dateModified: post.dateModified ?? post.datePublished,
     inLanguage: 'sr-Latn-RS',
     articleSection: post.category,
-    author: {
-      '@type': 'Person',
-      name: AUTHOR.name,
-      url: AUTHOR.url,
-    },
+    author: authorIdentityLd(),
     publisher: {
       '@type': 'Organization',
       name: SITE.name,

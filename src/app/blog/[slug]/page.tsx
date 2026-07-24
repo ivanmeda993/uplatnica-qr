@@ -3,8 +3,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { CreatorCard } from '@/components/blog/creator-card';
 import { Markdown } from '@/components/blog/markdown';
 import { JsonLd } from '@/components/seo/json-ld';
+import { TrackedPortfolioLink } from '@/components/seo/tracked-portfolio-link';
 import { Button } from '@/components/ui/button';
 import { getAllPosts, getPostBySlug, getRelatedPosts } from '@/lib/blog/posts';
 import { articleLd, breadcrumbLd } from '@/lib/landing/jsonld';
@@ -14,6 +16,12 @@ import { SiteShell } from '@/modules/landing/components/site-shell';
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+const CREATOR_CARD_POST_SLUGS: ReadonlyArray<string> = [
+  'sifre-placanja-srbija-spisak',
+  'model-97-poziv-na-broj-objasnjenje',
+  'kako-platiti-infostan-qr',
+];
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -97,14 +105,15 @@ export default async function BlogPostPage({ params }: PageProps) {
             </span>
             <span>
               Autor:{' '}
-              <a
+              <TrackedPortfolioLink
                 href={AUTHOR.url}
                 target="_blank"
                 rel="author noopener noreferrer"
-                className="text-foreground hover:text-brand font-medium"
+                placement="article_byline"
+                className="text-foreground hover:text-brand rounded-sm font-medium underline-offset-4 hover:underline"
               >
                 {AUTHOR.name}
-              </a>
+              </TrackedPortfolioLink>
             </span>
           </div>
         </header>
@@ -125,6 +134,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             </Link>
           </Button>
         </div>
+
+        {CREATOR_CARD_POST_SLUGS.includes(post.slug) && <CreatorCard />}
 
         {related.length > 0 && (
           <section className="mt-16" aria-labelledby="related-heading">

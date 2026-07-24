@@ -1,6 +1,8 @@
 import Link from 'next/link';
 
 import { Logo } from '@/components/brand/logo';
+import { TrackedPortfolioLink } from '@/components/seo/tracked-portfolio-link';
+import { AUTHOR } from '@/lib/site';
 
 export function LandingFooter() {
   const year = new Date().getFullYear();
@@ -27,6 +29,9 @@ export function LandingFooter() {
           <Link href="/alat" className="text-muted-foreground hover:text-foreground block">
             Besplatni alati
           </Link>
+          <Link href="/o-projektu" className="text-muted-foreground hover:text-foreground block">
+            O projektu
+          </Link>
           <Link href="/#faq" className="text-muted-foreground hover:text-foreground block">
             Često pitanja
           </Link>
@@ -47,14 +52,15 @@ export function LandingFooter() {
         <p>© {year} Uplatnica QR.</p>
         <p>
           Napravio{' '}
-          <a
-            href="https://ivanmilicevic.dev/"
+          <TrackedPortfolioLink
+            href={AUTHOR.url}
             target="_blank"
             rel="author noopener noreferrer"
-            className="text-foreground hover:text-brand font-medium underline-offset-4 hover:underline"
+            placement="footer_creator"
+            className="text-foreground hover:text-brand rounded-sm font-medium underline-offset-4 hover:underline"
           >
-            Ivan Milićević
-          </a>
+            {AUTHOR.name}
+          </TrackedPortfolioLink>
           .
         </p>
       </div>
