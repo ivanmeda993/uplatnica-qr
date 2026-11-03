@@ -49,9 +49,9 @@ export function WeddlistPromo() {
             className="rounded-sm p-3"
           >
             <Image
-              src="/images/weddlist/google-play-sr.png"
-              width={646}
-              height={192}
+              src="/images/weddlist/google-play-en.png"
+              width={564}
+              height={168}
               alt="Preuzmi WeddList na Google Play-u"
               unoptimized
               className="h-10 w-auto max-w-none"
