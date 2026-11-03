@@ -93,8 +93,8 @@ export function WeddlistPromo() {
         <figure className="mx-auto w-[116px] min-[380px]:col-start-2 min-[380px]:row-start-2 md:row-span-2 md:row-start-1 md:w-[148px]">
           <Image
             src="/images/weddlist/ios-guests.webp"
-            width={480}
-            height={1039}
+            width={585}
+            height={1266}
             alt="WeddList iOS: pregled gostiju i potvrda dolaska"
             unoptimized
             className="h-auto w-full"
