@@ -1,4 +1,5 @@
-import { ArrowUpRight, Heart, Smartphone } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
 import { WEDDLIST_LINKS } from '@/modules/landing/weddlist-links';
@@ -9,19 +10,20 @@ export function WeddlistPromo() {
       aria-labelledby="weddlist-heading"
       className="bg-card border-border mt-12 rounded-3xl border p-6 sm:p-8"
     >
-      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-10">
-        <div className="max-w-lg">
+      <div className="grid items-start gap-x-4 gap-y-5 min-[380px]:grid-cols-[minmax(0,1fr)_116px] md:grid-cols-[minmax(0,1fr)_148px] md:gap-x-12">
+        <div className="min-[380px]:col-span-2 md:col-span-1">
           <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
-            Naš drugi projekat
+            Moj drugi projekat
           </p>
-          <h2
-            id="weddlist-heading"
-            className="font-display mt-3 flex items-center gap-3 text-2xl font-semibold tracking-tight"
-          >
-            <span className="bg-brand-soft text-brand flex size-9 items-center justify-center rounded-xl">
-              <Heart className="size-4" aria-hidden="true" />
-            </span>
-            WeddList
+          <h2 id="weddlist-heading" className="mt-4">
+            <Image
+              src="/images/weddlist/logo-lockup.webp"
+              width={896}
+              height={199}
+              alt="WeddList"
+              unoptimized
+              className="h-auto w-56 max-w-full"
+            />
           </h2>
           <p className="text-foreground mt-4 text-base font-medium">
             Planiranje venčanja i proslava.
@@ -30,25 +32,30 @@ export function WeddlistPromo() {
             Aplikacija na srpskom za goste, raspored stolova, troškove i poklone, pozivnicu,
             galeriju i planer.
           </p>
-        </div>
-
-        <div className="flex shrink-0 flex-col gap-3 md:w-56">
-          <Button variant="outline" asChild>
+          <Button variant="outline" asChild className="mt-5">
             <a href={WEDDLIST_LINKS.website} target="_blank" rel="noopener noreferrer">
               Upoznaj WeddList
               <ArrowUpRight aria-hidden="true" />
               <span className="sr-only"> (otvara se u novom tabu)</span>
             </a>
           </Button>
+        </div>
+
+        <div className="-m-3 flex flex-wrap items-start md:col-start-1 md:row-start-2">
           <a
             href={WEDDLIST_LINKS.android}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground hover:bg-muted flex min-h-11 items-center justify-center gap-2 rounded-full px-4 text-sm font-medium"
+            className="rounded-sm p-3"
           >
-            <Smartphone className="size-4" aria-hidden="true" />
-            Android · Google Play
-            <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            <Image
+              src="/images/weddlist/google-play-sr.png"
+              width={646}
+              height={192}
+              alt="Preuzmi WeddList na Google Play-u"
+              unoptimized
+              className="h-10 w-auto max-w-none"
+            />
             <span className="sr-only"> (otvara se u novom tabu)</span>
           </a>
           {WEDDLIST_LINKS.ios ? (
@@ -56,17 +63,51 @@ export function WeddlistPromo() {
               href={WEDDLIST_LINKS.ios}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:bg-muted flex min-h-11 items-center justify-center gap-2 rounded-full px-4 text-sm font-medium"
+              className="rounded-sm p-3"
             >
-              iOS · App Store
-              <ArrowUpRight className="size-3.5" aria-hidden="true" />
+              <Image
+                src="/images/weddlist/app-store-en.svg"
+                width={120}
+                height={40}
+                alt="Preuzmi WeddList na App Store-u"
+                unoptimized
+                className="h-10 w-auto max-w-none"
+              />
               <span className="sr-only"> (otvara se u novom tabu)</span>
             </a>
           ) : (
-            <p className="text-muted-foreground text-center text-xs">iOS · Uskoro</p>
+            <div className="p-3">
+              <Image
+                src="/images/weddlist/app-store-en.svg"
+                width={120}
+                height={40}
+                alt="WeddList za iOS još nije dostupan na App Store-u"
+                unoptimized
+                className="h-10 w-auto max-w-none"
+              />
+              <p className="text-muted-foreground mt-3 text-center text-xs">Uskoro</p>
+            </div>
           )}
         </div>
+
+        <figure className="mx-auto w-[116px] min-[380px]:col-start-2 min-[380px]:row-start-2 md:row-span-2 md:row-start-1 md:w-[148px]">
+          <Image
+            src="/images/weddlist/ios-guests.webp"
+            width={480}
+            height={1039}
+            alt="WeddList iOS: pregled gostiju i potvrda dolaska"
+            unoptimized
+            className="h-auto w-full"
+          />
+          <figcaption className="text-muted-foreground mt-3 text-center text-[11px]">
+            Izgled iOS aplikacije
+          </figcaption>
+        </figure>
       </div>
+      <p className="text-muted-foreground mt-6 text-[10px] leading-relaxed">
+        Google Play i Google Play logo su zaštićeni znakovi kompanije Google LLC. App Store i Apple
+        logo su zaštićeni znakovi kompanije Apple Inc.
+      </p>
     </section>
   );
 }
