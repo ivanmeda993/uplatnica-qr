@@ -67,9 +67,9 @@ export function WeddlistPromo() {
               className="block rounded-sm"
             >
               <Image
-                src="/images/weddlist/app-store-en.svg"
-                width={120}
-                height={40}
+                src="/images/weddlist/app-store-en-wide.svg"
+                width={564}
+                height={168}
                 alt="Preuzmi WeddList na App Store-u"
                 unoptimized
                 className={BADGE_CLASS}
@@ -79,9 +79,9 @@ export function WeddlistPromo() {
           ) : (
             <div>
               <Image
-                src="/images/weddlist/app-store-en.svg"
-                width={120}
-                height={40}
+                src="/images/weddlist/app-store-en-wide.svg"
+                width={564}
+                height={168}
                 alt="WeddList za iOS još nije dostupan na App Store-u"
                 unoptimized
                 className={BADGE_CLASS}
