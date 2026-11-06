@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { breadcrumbLd } from '@/lib/landing/jsonld';
 import { AUTHOR, getSiteUrl, SITE } from '@/lib/site';
 import { SiteShell } from '@/modules/landing/components/site-shell';
+import { WeddlistPromo } from '@/modules/landing/components/weddlist-promo';
 
 const ABOUT_TITLE = 'O projektu Uplatnica QR';
 const ABOUT_DESCRIPTION =
@@ -179,6 +180,7 @@ export default function AboutProjectPage() {
             </p>
           </aside>
         </div>
+        <WeddlistPromo />
       </section>
     </SiteShell>
   );
