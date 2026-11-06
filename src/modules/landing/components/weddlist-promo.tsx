@@ -13,7 +13,7 @@ export function WeddlistPromo() {
       aria-labelledby="weddlist-heading"
       className="bg-card border-border mt-12 rounded-3xl border p-4 sm:p-8"
     >
-      <div className="grid items-start gap-y-5 md:grid-cols-[minmax(0,1fr)_148px] md:gap-x-12">
+      <div className="grid items-start gap-y-5 md:grid-cols-[minmax(0,1fr)_296px] md:gap-x-10">
         <div>
           <h2 id="weddlist-heading">
             <Image
@@ -28,7 +28,7 @@ export function WeddlistPromo() {
           <p className="text-foreground mt-4 text-base font-medium">
             Planiranje venčanja i proslava.
           </p>
-          <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+          <p className="text-muted-foreground mt-2 text-sm leading-relaxed text-pretty">
             Aplikacija na srpskom za goste, raspored stolova, troškove i poklone, pozivnicu,
             galeriju i planer.
           </p>
@@ -77,7 +77,7 @@ export function WeddlistPromo() {
               <span className="sr-only"> (otvara se u novom tabu)</span>
             </a>
           ) : (
-            <div>
+            <div className="relative">
               <Image
                 src="/images/weddlist/app-store-en-wide.svg"
                 width={564}
@@ -86,24 +86,31 @@ export function WeddlistPromo() {
                 unoptimized
                 className={BADGE_CLASS}
               />
-              <p className="text-muted-foreground mt-3.5 text-center text-xs">Uskoro</p>
+              <span className="absolute top-0 -right-[15px] z-10 inline-flex -translate-y-1/2 rounded-full border border-[#d5b268] bg-[#e9cc8a] px-2.5 py-0.5 text-[11px] leading-4 font-semibold tracking-wide text-[#4b3512] shadow-sm">
+                Uskoro
+              </span>
             </div>
           )}
         </div>
 
-        <figure className="w-full max-w-sm md:col-start-2 md:row-span-2 md:row-start-1 md:w-[148px]">
+        <div className="grid w-full max-w-sm grid-cols-2 items-start gap-3 md:col-start-2 md:row-span-2 md:row-start-1 md:max-w-none">
           <Image
             src="/images/weddlist/ios-guests.webp"
             width={585}
             height={1266}
             alt="WeddList iOS: pregled gostiju i potvrda dolaska"
             unoptimized
-            className="border-border h-auto w-full rounded-2xl border"
+            className="border-border h-auto w-full rounded-xl border shadow-lg"
           />
-          <figcaption className="text-muted-foreground mt-3 text-center text-[11px]">
-            Izgled iOS aplikacije
-          </figcaption>
-        </figure>
+          <Image
+            src="/images/weddlist/ios-expenses.webp"
+            width={585}
+            height={1266}
+            alt="WeddList iOS: pregled planiranih i plaćenih troškova"
+            unoptimized
+            className="border-border mt-6 h-auto w-full rounded-xl border shadow-lg"
+          />
+        </div>
       </div>
     </section>
   );
