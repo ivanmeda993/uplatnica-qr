@@ -41,6 +41,11 @@ export function Markdown({ content, className }: MarkdownProps) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
+          table: ({ children, node: _node, ...props }) => (
+            <div className="overflow-x-auto">
+              <table {...props}>{children}</table>
+            </div>
+          ),
           h2: ({ children, ...props }) => {
             const text = String(children);
             return (

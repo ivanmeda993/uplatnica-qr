@@ -25,7 +25,7 @@ export function TryItDemo() {
     <section
       id="probaj"
       aria-labelledby="probaj-heading"
-      className="mx-auto max-w-5xl scroll-mt-20 px-5 pb-20"
+      className="mx-auto max-w-6xl scroll-mt-20 px-5 pb-20"
     >
       <div className="mx-auto mb-10 max-w-2xl space-y-3 text-center">
         <Badge variant="brand" className="px-3 py-1 text-[11px] tracking-wider uppercase">

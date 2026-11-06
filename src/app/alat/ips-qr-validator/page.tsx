@@ -26,7 +26,7 @@ export default function IpsValidatorPage() {
         ])}
       />
 
-      <article className="mx-auto max-w-4xl px-5 py-10 sm:py-14">
+      <article className="mx-auto max-w-6xl px-5 py-10 sm:py-14">
         <header className="mb-8">
           <p className="text-brand text-xs font-semibold tracking-wider uppercase">Validator</p>
           <h1 className="font-display mt-2 text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl">

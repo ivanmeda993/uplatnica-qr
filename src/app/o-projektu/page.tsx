@@ -8,7 +8,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { breadcrumbLd } from '@/lib/landing/jsonld';
 import { AUTHOR, getSiteUrl, SITE } from '@/lib/site';
 import { SiteShell } from '@/modules/landing/components/site-shell';
-import { WeddlistPromo } from '@/modules/landing/components/weddlist-promo';
 
 const ABOUT_TITLE = 'O projektu Uplatnica QR';
 const ABOUT_DESCRIPTION =
@@ -66,7 +65,7 @@ export default function AboutProjectPage() {
         ])}
       />
 
-      <section className="mx-auto max-w-5xl px-5 py-12 sm:py-16">
+      <section className="mx-auto max-w-6xl px-5 py-12 sm:py-16">
         <div className="max-w-3xl">
           <p className="text-brand text-xs font-semibold tracking-wider uppercase">O projektu</p>
           <h1 className="font-display mt-3 text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl">
@@ -180,7 +179,6 @@ export default function AboutProjectPage() {
             </p>
           </aside>
         </div>
-        <WeddlistPromo />
       </section>
     </SiteShell>
   );

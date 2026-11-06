@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         ]}
       />
 
-      <article className="mx-auto max-w-4xl px-5 py-10 sm:py-14">
+      <article className="mx-auto max-w-6xl px-5 py-10 sm:py-14">
         <Link
           href="/blog"
           className="text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-1.5 text-xs"
@@ -118,7 +118,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </header>
 
-        <Markdown content={post.content} />
+        <Markdown content={post.content} className="max-w-4xl" />
 
         <div className="bg-mesh-soft border-border mt-12 rounded-3xl border p-8">
           <h3 className="text-foreground font-display text-2xl font-semibold tracking-tight">

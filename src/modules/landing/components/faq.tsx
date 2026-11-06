@@ -11,7 +11,7 @@ export function Faq() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="mx-auto max-w-3xl scroll-mt-24 px-5 py-20"
+      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20"
     >
       <div className="mb-10 max-w-2xl">
         <p className="text-brand mb-3 text-xs font-semibold tracking-wider uppercase">FAQ</p>
@@ -23,7 +23,7 @@ export function Faq() {
         </h2>
       </div>
 
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion type="single" collapsible className="w-full max-w-3xl">
         {FAQ.map((item, i) => (
           <AccordionItem key={item.q} value={`item-${i}`}>
             <AccordionTrigger className="text-left text-base font-semibold">

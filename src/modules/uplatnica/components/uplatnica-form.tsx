@@ -287,7 +287,7 @@ export function UplatnicaForm({
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onPreview)} noValidate className="space-y-6">
-              <div className="grid gap-5 lg:grid-cols-2">
+              <div className={cn('grid gap-5 lg:grid-cols-2', anonymous && 'grid-cols-1')}>
                 {/* Hero amount input — full width on every breakpoint */}
                 <FormField
                   control={form.control}
